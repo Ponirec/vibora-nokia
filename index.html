@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Snake Nokia</title>
+        <link rel="stylesheet" href="style.css">
+      </head>
+      
+<body>
+  <h1>🐍 Snake Nokia Edition</h1>
+
+  <div id="scoreBoard">Puntaje: 0</div>
+  <div id="speedDisplay">Velocidad: Normal</div>
+
+
+  <canvas id="gameCanvas" width="168" height="96"></canvas>
+
+  <div id="startScreen">
+    <p>Presiona <strong>Enter</strong> para comenzar</p>
+  </div>
+
+  <audio id="beep" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+  <audio id="death" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+
+  <div id="overlay"></div>
+ 
+  <div id="nokiaPad">
+    <div class="nokia-row"><button data-dir="up">2</button></div>
+    <div class="nokia-row">
+      <button data-dir="left">4</button>
+      <button data-dir="down">8</button>
+      <button data-dir="right">6</button>
+    </div>
+  </div>
+  
+  
+  <script src="script.js"></script>
+</body>
+</html>
