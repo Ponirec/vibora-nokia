@@ -246,3 +246,26 @@ const startBtn = document.getElementById("startBtn");
 startBtn.addEventListener("click", () => {
   if (!gameRunning) startGame();
 });
+
+const speedButtons = document.querySelectorAll("#speedControls button");
+
+speedButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const mode = btn.dataset.speed;
+
+    switch (mode) {
+      case "slow":
+        gameSpeed = 150;
+        updateSpeedDisplay("Lenta");
+        break;
+      case "normal":
+        gameSpeed = 100;
+        updateSpeedDisplay("Normal");
+        break;
+      case "fast":
+        gameSpeed = 60;
+        updateSpeedDisplay("Rápida");
+        break;
+    }
+  });
+});
