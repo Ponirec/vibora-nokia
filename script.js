@@ -240,3 +240,9 @@ nokiaButtons.forEach(btn => {
     }
   });
 });
+
+const startBtn = document.getElementById("startBtn");
+
+startBtn.addEventListener("click", () => {
+  if (!gameRunning) startGame();
+});
