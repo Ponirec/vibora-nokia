@@ -21,17 +21,19 @@ let snake = [{ x: 10, y: 10 }];
 let apple = generateApple();
 let velocity = { x: 1, y: 0 };
 let score = 0;
+let highScore = localStorage.getItem("snakeHighScore") || 0;
 let gameRunning = false;
-let gameSpeed = 100; // velocidad normal por defecto
+let gameSpeed = 150; // velocidad lenta por defecto
 
 
 function gameLoop() {
-  if (!gameRunning) return;
+  if (!gameRunning || isPaused) return;
 
   update();
   draw();
   setTimeout(gameLoop, gameSpeed);
 }
+
 
 function update() {
   const head = { x: snake[0].x + velocity.x, y: snake[0].y + velocity.y };
@@ -42,8 +44,11 @@ function update() {
     apple = generateApple();
     score++;
     updateScore();
+    updateLevel();
     beepSound.currentTime = 0;
     beepSound.play();
+    if (navigator.vibrate) navigator.vibrate(100);
+
   } else {
     snake.pop();
     snake.unshift(head);
@@ -92,6 +97,8 @@ function draw() {
 
 function updateScore() {
   scoreBoard.textContent = `Puntaje: ${score}`;
+  document.getElementById("highScoreDisplay").textContent = `Récord: ${highScore}`;
+
 }
 
 function endGame() {
@@ -100,10 +107,17 @@ function endGame() {
   showOverlay();
   deathSound.currentTime = 0;
   deathSound.play();
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+
 
   setTimeout(() => {
     canvas.classList.remove("flash");
     alert(`💀 Game Over — Puntaje: ${score}`);
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem("snakeHighScore", highScore);
+      document.getElementById("highScoreDisplay").textContent = `Récord: ${highScore}`;
+    }    
     resetGame();
     showStartScreen();
   }, 600);
@@ -170,10 +184,39 @@ document.addEventListener("keydown", (e) => {
         gameSpeed = 60;
         updateSpeedDisplay("Rápida");
         break;
-      
-      
+      case "p":
+        case "P":
+          togglePause();
+            break;    
   }
 });
+
+let level = 1;
+function updateLevel() {
+  let newLevel = 1;
+  let newSpeed = 150;
+
+  if (score >= 10) {
+    newLevel = 2;
+    newSpeed = 120;
+  }
+  if (score >= 20) {
+    newLevel = 3;
+    newSpeed = 90;
+  }
+  if (score >= 30) {
+    newLevel = 4;
+    newSpeed = 60;
+  }
+
+  if (newLevel !== level) {
+    level = newLevel;
+    gameSpeed = newSpeed;
+    document.getElementById("levelDisplay").textContent = `Nivel: ${level}`;
+  }
+}
+
+
 
 // Mostrar pantalla de inicio al cargar
 showStartScreen();
@@ -243,6 +286,7 @@ nokiaButtons.forEach(btn => {
 
 const startBtn = document.getElementById("startBtn");
 
+
 startBtn.addEventListener("click", () => {
   if (!gameRunning) startGame();
 });
@@ -269,3 +313,21 @@ speedButtons.forEach(btn => {
     }
   });
 });
+
+let isPaused = false;
+const pauseBtn = document.getElementById("pauseBtn");
+pauseBtn.addEventListener("click", () => {
+  togglePause();
+});
+function togglePause() {
+  isPaused = !isPaused;
+
+  if (isPaused) {
+    pauseBtn.textContent = "▶️ Reanudar";
+  } else {
+    pauseBtn.textContent = "⏸️ Pausar";
+    gameLoop(); // vuelve a correr el loop
+  }
+}
+
+

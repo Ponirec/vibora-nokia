@@ -11,6 +11,11 @@ body {
     font-size: 18px;
     margin-bottom: 10px;
   }
+
+  h2, h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
   
   #scoreBoard {
     font-size: 16px;
@@ -62,6 +67,12 @@ body {
     font-size: 14px;
     margin-bottom: 10px;
   }
+
+  #highScoreDisplay {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
 
   body {
     background-color: #9db78b;
@@ -219,10 +230,34 @@ body {
     background-color: #a0be70;
     box-shadow: inset 1px 1px 2px #333;
   }
+
+  #pauseContainer {
+    margin-top: 20px;
+    display: none;
+  }
+  
+  #pauseBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #bcd18a;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+  }
+  
+  #pauseBtn:active {
+    background-color: #a0be70;
+  }
+  
   
   @media (max-width: 600px) {
     #speedControls {
       display: flex;
+    }
+
+    #pauseContainer {
+      display: block;
     }
   }
   

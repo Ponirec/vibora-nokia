@@ -5,14 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Snake Nokia</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="https://fav.farm/📟">
       </head>
       
 <body>
   <h1>🐍 Snake Nokia Edition</h1>
 
   <div id="scoreBoard">Puntaje: 0</div>
-  <div id="speedDisplay">Velocidad: Normal</div>
+  <div id="speedDisplay">Velocidad: Lenta</div>
+  <div id="levelDisplay">Nivel: 1</div>
+  <div id="highScoreDisplay">Récord: 0</div>
 
+
+ 
+  <h2>Pausa = "P"</h2>
+
+  <h3>Muévete con las flechas:  </h3>
 
   <canvas id="gameCanvas" width="168" height="96"></canvas>
 
@@ -41,6 +49,11 @@
     <button data-speed="normal">Normal</button>
     <button data-speed="fast">Rápido</button>
   </div>
+
+  <div id="pauseContainer">
+    <button id="pauseBtn">⏸️ Pausar</button>
+  </div>
+  
   
   <script src="script.js"></script>
 </body>
