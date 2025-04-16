@@ -252,12 +252,22 @@ body {
   
   
   @media (max-width: 600px) {
+    
+    body {
+      overflow-y: hidden;
+    }
+    
     #speedControls {
       display: flex;
     }
 
     #pauseContainer {
       display: block;
+    }
+
+    canvas {
+      max-width: 90%;
+      height: auto;
     }
   }
   
