@@ -252,9 +252,10 @@ body {
   
   
   @media (max-width: 600px) {
-    
+
     body {
       overflow-y: hidden;
+      margin-top: 10px;
     }
     
     #speedControls {

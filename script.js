@@ -1,4 +1,8 @@
 const canvas = document.getElementById("gameCanvas");
+const ratio = window.devicePixelRatio || 1;
+canvas.width = canvas.offsetWidth * ratio;
+canvas.height = canvas.offsetHeight * ratio;
+ctx.scale(ratio, ratio); // ctx es el contexto 2D del canvas
 const ctx = canvas.getContext("2d");
 const scoreBoard = document.getElementById("scoreBoard");
 const startScreen = document.getElementById("startScreen");
@@ -329,5 +333,6 @@ function togglePause() {
     gameLoop(); // vuelve a correr el loop
   }
 }
+
 
 
