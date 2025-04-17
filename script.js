@@ -25,7 +25,7 @@ function updateSpeedDisplay(mode) {
 }
 
 
-const gridSize = 6; // Tamaño del bloque
+const gridSize = 12; // Tamaño del bloque
 const tileCountX = canvas.width / gridSize;
 const tileCountY = canvas.height / gridSize;
 

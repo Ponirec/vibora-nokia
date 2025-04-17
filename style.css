@@ -118,6 +118,27 @@ body {
     max-width: 300px;
   }
   
+  #pauseContainer {
+    display: block;
+    margin-top: 10px;
+    display: none;
+  }
+  
+  #pauseBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #bcd18a;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+  }
+  
+  #pauseBtn:active {
+    background-color: #a0be70;
+  }
+  
+
   #touchControls {
     margin-top: 20px;
     display: none;
