@@ -36,6 +36,8 @@ let score = 0;
 let highScore = localStorage.getItem("snakeHighScore") || 0;
 let gameRunning = false;
 let gameSpeed = 150; // velocidad lenta por defecto
+let gameState = "start";
+
 
 
 function gameLoop() {
@@ -118,6 +120,7 @@ function updateScore() {
 
 function endGame() {
   gameRunning = false;
+  gameState = "gameOver";
   canvas.classList.add("flash");
   showOverlay();
   deathSound.currentTime = 0;
@@ -147,6 +150,7 @@ function resetGame() {
   score = 0;
   apple = generateApple();
   gameRunning = true;
+  gameState = "start";
   isPaused = false;
   updateScore();
 }
