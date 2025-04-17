@@ -179,6 +179,7 @@ function startGame() {
   resetGame();
   gameRunning = true;
   gameLoop();
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 }
 
 function showStartScreen() {
