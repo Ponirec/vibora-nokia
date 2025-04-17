@@ -93,6 +93,8 @@ body {
     width: 100%;
     max-width: 336px; /* equivalente a 2x escala de 168px */
     height: auto;
+    display: block;
+    margin: 0 auto;
     aspect-ratio: 7 / 4;
   }
   
@@ -232,7 +234,8 @@ body {
   }
 
   #pauseContainer {
-    margin-top: 20px;
+    display: block;
+    margin-top: 10px;
     display: none;
   }
   
@@ -255,21 +258,24 @@ body {
 
     body {
       overflow-y: hidden;
-      margin-top: 10px;
     }
     
     #speedControls {
       display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     #pauseContainer {
       display: block;
     }
-
     canvas {
-      max-width: 90%;
+      width: 100%;
+      max-width: 300px;
       height: auto;
+      image-rendering: pixelated;
     }
+    
   }
   
   

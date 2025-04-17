@@ -1,9 +1,17 @@
-const canvas = document.getElementById("gameCanvas");
+/*const canvas = document.getElementById("gameCanvas");
 const ratio = window.devicePixelRatio || 1;
+const ctx = canvas.getContext("2d");
 canvas.width = canvas.offsetWidth * ratio;
 canvas.height = canvas.offsetHeight * ratio;
-ctx.scale(ratio, ratio); // ctx es el contexto 2D del canvas
+ctx.scale(ratio, ratio); // ctx es el contexto 2D del canvas*/
+
+const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+
+canvas.width = 300;
+canvas.height = 300;
+
+
 const scoreBoard = document.getElementById("scoreBoard");
 const startScreen = document.getElementById("startScreen");
 const overlay = document.getElementById("overlay");
@@ -35,8 +43,11 @@ function gameLoop() {
 
   update();
   draw();
+
   setTimeout(gameLoop, gameSpeed);
 }
+
+
 
 
 function update() {
@@ -111,29 +122,52 @@ function endGame() {
   showOverlay();
   deathSound.currentTime = 0;
   deathSound.play();
-  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
 
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
 
   setTimeout(() => {
     canvas.classList.remove("flash");
     alert(`💀 Game Over — Puntaje: ${score}`);
+
     if (score > highScore) {
       highScore = score;
       localStorage.setItem("snakeHighScore", highScore);
       document.getElementById("highScoreDisplay").textContent = `Récord: ${highScore}`;
-    }    
-    resetGame();
-    showStartScreen();
+    }
+
+    showStartScreen(); // ✅ esto aparece la pantalla con el botón "INICIAR"
   }, 600);
 }
 
+
 function resetGame() {
   snake = [{ x: 10, y: 10 }];
-  velocity = { x: 1, y: 0 };
-  apple = generateApple();
+  direction = { x: 1, y: 0 };
+  speed = 200;
   score = 0;
+  apple = generateApple();
+  gameRunning = true;
+  isPaused = false;
   updateScore();
 }
+
+
+function spawnApple() {
+  let attempts = 0;
+  while (attempts < 1000) {
+    let newApple = {
+      x: Math.floor(Math.random() * cols),
+      y: Math.floor(Math.random() * rows),
+    };
+    if (!checkCollision(newApple, snake)) {
+      apple = newApple;
+      return;
+    }
+    attempts++;
+  }
+  console.warn("No se pudo encontrar espacio para una nueva manzana");
+}
+
 
 function startGame() {
   hideStartScreen();
@@ -194,6 +228,14 @@ document.addEventListener("keydown", (e) => {
             break;    
   }
 });
+
+document.addEventListener("keydown", function (event) {
+  if (gameState === "gameOver" && event.key === "Enter") {
+    resetGame();
+    gameLoop();
+  }
+});
+
 
 let level = 1;
 function updateLevel() {
